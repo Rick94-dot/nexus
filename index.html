@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O.D.I.N — Entrar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #1c3a5e;
+      --navy-deep: #14294a;
+      --navy-hover: #25497a;
+      --input-bg: #d4dde3;
+      --input-bg-focus: #c5d2da;
+      --text-muted: #5a7088;
+      --white: #ffffff;
+      --black: #000000;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Nunito Sans', -apple-system, sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100vh;
+    }
+
+    /* ----------- LADO ESQUERDO (login) ----------- */
+    .login-side {
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .login-wrap {
+      width: 100%;
+      max-width: 380px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .login-wrap > * {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: rise 0.7s cubic-bezier(.2,.7,.2,1) forwards;
+    }
+    .login-wrap > *:nth-child(1) { animation-delay: 0.1s; }
+    .login-wrap > *:nth-child(2) { animation-delay: 0.25s; }
+    .login-wrap > *:nth-child(3) { animation-delay: 0.35s; }
+    .login-wrap > *:nth-child(4) { animation-delay: 0.45s; }
+    .login-wrap > *:nth-child(5) { animation-delay: 0.55s; }
+    .login-wrap > *:nth-child(6) { animation-delay: 0.7s; }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 180px;
+      height: auto;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 4px 12px rgba(28, 58, 94, 0.08));
+    }
+
+    .brand-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 48px;
+      letter-spacing: 0.02em;
+      color: var(--navy);
+      line-height: 1;
+    }
+
+    .welcome {
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 300;
+      font-size: 28px;
+      color: var(--navy);
+      margin-top: 8px;
+      margin-bottom: 40px;
+      letter-spacing: -0.01em;
+    }
+
+    form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .field {
+      width: 100%;
+      text-align: left;
+    }
+
+    .field label {
+      display: block;
+      font-size: 14px;
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-weight: 400;
+      padding-left: 4px;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .field input {
+      width: 100%;
+      background: var(--input-bg);
+      border: 2px solid transparent;
+      border-radius: 999px;
+      padding: 14px 22px;
+      font-size: 15px;
+      font-family: inherit;
+      color: var(--navy);
+      outline: none;
+      transition: all 0.25s ease;
+    }
+
+    .field input:focus {
+      background: var(--input-bg-focus);
+      border-color: var(--navy);
+    }
+
+    .field input::placeholder {
+      color: transparent;
+    }
+
+    .input-wrap.has-icon input {
+      padding-right: 50px;
+    }
+
+    .toggle-pw {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--navy);
+      display: grid;
+      place-items: center;
+      padding: 6px;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+    .toggle-pw:hover { background: rgba(28, 58, 94, 0.08); }
+    .toggle-pw svg { display: block; }
+
+    .btn {
+      margin-top: 16px;
+      align-self: center;
+      padding: 14px 56px;
+      background: var(--navy);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      background: var(--navy-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(28, 58, 94, 0.25);
+    }
+
+    .btn:active { transform: translateY(0); }
+
+    /* ----------- LADO DIREITO (placeholder preto) ----------- */
+    .right-side {
+      background: var(--black);
+    }
+
+    /* ----------- RESPONSIVO ----------- */
+    @media (max-width: 860px) {
+      body { overflow: auto; }
+      .page { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
+      .right-side { display: none; }
+      .login-side { min-height: 100vh; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- LADO LOGIN -->
+    <section class="login-side">
+      <div class="login-wrap">
+        <img src="logo-odin.png" alt="O.D.I.N logo" class="logo" />
+        <h1 class="brand-name">O.D.I.N</h1>
+        <p class="welcome">Seja bem-vindo</p>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="user">Informe seu usuário</label>
+            <div class="input-wrap">
+              <input type="text" id="user" name="user" placeholder=" " required autocomplete="username" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="password">Informe sua senha</label>
+            <div class="input-wrap has-icon">
+              <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
+              <button type="button" class="toggle-pw" id="togglePw" aria-label="Mostrar senha">
+                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn">ENTRAR</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- LADO DIREITO (preto, placeholder) -->
+    <section class="right-side"></section>
+
+  </div>
+
+  <script>
+    // Mostrar/ocultar senha
+    const pwInput = document.getElementById('password');
+    const toggleBtn = document.getElementById('togglePw');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    const eyeOpen = `
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    `;
+    const eyeClosed = `
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>
+    `;
+
+    toggleBtn.addEventListener('click', () => {
+      const isPw = pwInput.type === 'password';
+      pwInput.type = isPw ? 'text' : 'password';
+      eyeIcon.innerHTML = isPw ? eyeClosed : eyeOpen;
+      toggleBtn.setAttribute('aria-label', isPw ? 'Ocultar senha' : 'Mostrar senha');
+    });
+
+    // Submit
+    const form = document.getElementById('loginForm');
+    const submitBtn = form.querySelector('.btn');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = document.getElementById('user').value.trim();
+      const password = pwInput.value;
+
+      if (!user || !password) {
+        const original = submitBtn.textContent;
+        submitBtn.textContent = 'PREENCHA OS CAMPOS';
+        setTimeout(() => submitBtn.textContent = original, 1600);
+        return;
+      }
+
+      submitBtn.textContent = 'ENTRANDO...';
+      setTimeout(() => {
+        submitBtn.textContent = 'BEM-VINDO ✓';
+        // aqui você plugaria a chamada real de autenticação
+      }, 900);
+    });
+  </script>
+</body>
+</html>
