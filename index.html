@@ -6,376 +6,394 @@
   <title>O.D.I.N — Entrar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --navy: #1c3a5e;
-      --navy-deep: #14294a;
-      --navy-hover: #25497a;
-      --navy-glow: rgba(28, 58, 94, 0.18);
-      --input-bg: #d4dde3;
-      --input-bg-focus: #c5d2da;
-      --text-muted: #5a7088;
-      --white: #ffffff;
-      --paper: #fafbfc;
-      --black: #000000;
+      --navy:       #1c3a5e;
+      --navy-deep:  #14294a;
+      --navy-mid:   #25497a;
+      --navy-glow:  rgba(28, 58, 94, 0.15);
+      --input-bg:   rgba(28, 58, 94, 0.07);
+      --input-hover:rgba(28, 58, 94, 0.11);
+      --muted:      #6b82a0;
+      --paper:      #f8f9fb;
+      --white:      #ffffff;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body { height: 100%; }
 
     body {
       font-family: 'Nunito Sans', -apple-system, sans-serif;
-      background: var(--white);
-      color: var(--navy);
       -webkit-font-smoothing: antialiased;
       overflow: hidden;
     }
 
+    /* ===================== LAYOUT ===================== */
     .page {
       display: grid;
       grid-template-columns: 1fr 1fr;
       height: 100vh;
     }
 
-    /* ----------- LADO ESQUERDO ----------- */
+    /* ===================== LADO ESQUERDO ===================== */
     .login-side {
-      background:
-        radial-gradient(ellipse at top left, rgba(28, 58, 94, 0.04), transparent 60%),
-        radial-gradient(ellipse at bottom right, rgba(28, 58, 94, 0.03), transparent 60%),
-        var(--paper);
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 40px;
-      position: relative;
+      background: var(--paper);
       overflow: hidden;
+      z-index: 2;
     }
 
-    /* Canvas das partículas (atrás de tudo) */
+    /* Gradiente radial de fundo */
+    .login-side::before {
+      content: "";
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(28,58,94,0.055) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 50% at 85% 90%, rgba(28,58,94,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Partículas */
     #particles {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* Textura de papel sutil */
-    .login-side::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.23 0 0 0 0 0.37 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-      opacity: 0.7;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .login-wrap {
+    /* ---- CARD ---- */
+    .card {
+      position: relative;
+      z-index: 3;
       width: 100%;
-      max-width: 380px;
+      max-width: 390px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border: 1px solid rgba(28,58,94,0.09);
+      border-radius: 24px;
+      box-shadow:
+        0 2px 4px rgba(28,58,94,0.04),
+        0 8px 24px rgba(28,58,94,0.07),
+        0 32px 64px rgba(28,58,94,0.06);
+      padding: 44px 40px 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-      position: relative;
-      z-index: 3;
     }
 
-    /* Animação de entrada */
-    .anim-in {
+    /* ---- Animações de entrada ---- */
+    .fade-up {
       opacity: 0;
-      transform: translateY(12px);
-      animation: rise 0.8s cubic-bezier(.2,.7,.2,1) forwards;
+      transform: translateY(14px);
+      animation: fadeUp 0.75s cubic-bezier(.18,.7,.2,1) forwards;
     }
-    .delay-1 { animation-delay: 0.15s; }
-    .delay-2 { animation-delay: 0.35s; }
-    .delay-3 { animation-delay: 0.55s; }
-    .delay-4 { animation-delay: 0.75s; }
-    .delay-5 { animation-delay: 0.95s; }
-    .delay-6 { animation-delay: 1.15s; }
+    .d1 { animation-delay: 0.10s; }
+    .d2 { animation-delay: 0.30s; }
+    .d3 { animation-delay: 0.50s; }
+    .d4 { animation-delay: 0.70s; }
+    .d5 { animation-delay: 0.90s; }
+    .d6 { animation-delay: 1.10s; }
 
-    @keyframes rise {
+    @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Logo com "respiração" */
+    /* ---- Logo ---- */
     .logo {
-      width: 240px;
+      width: 200px;
       height: auto;
-      margin-bottom: 16px;
-      filter: drop-shadow(0 6px 24px rgba(28, 58, 94, 0.12));
-      animation:
-        rise 0.8s cubic-bezier(.2,.7,.2,1) forwards,
-        breathe 6s ease-in-out 1.6s infinite;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 8px 20px rgba(28,58,94,0.14));
       opacity: 0;
-      transform: translateY(12px);
-      animation-delay: 0.15s, 1.6s;
+      transform: translateY(14px) scale(0.97);
+      animation:
+        logoIn  0.9s cubic-bezier(.18,.7,.2,1) 0.1s forwards,
+        breathe 7s  ease-in-out 2s infinite;
     }
 
+    @keyframes logoIn {
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
     @keyframes breathe {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50%      { transform: translateY(-3px) scale(1.015); }
+      0%,100% { transform: translateY(0) scale(1); }
+      50%     { transform: translateY(-4px) scale(1.018); }
     }
 
-    /* Título O.D.I.N — reveal letra por letra */
+    /* ---- Título letter-by-letter ---- */
     .brand-name {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
-      font-size: 50px;
-      letter-spacing: 0.03em;
+      font-size: 52px;
+      letter-spacing: 0.04em;
       color: var(--navy);
       line-height: 1;
       display: flex;
-      gap: 2px;
       justify-content: center;
     }
-
-    .brand-name .letter {
+    .brand-name .l {
       display: inline-block;
       opacity: 0;
-      transform: translateY(14px);
-      animation: letterIn 0.6s cubic-bezier(.2,.7,.2,1) forwards;
+      transform: translateY(16px);
+      animation: letterIn 0.55s cubic-bezier(.18,.7,.2,1) forwards;
     }
-    .brand-name .letter:nth-child(1) { animation-delay: 0.5s; }
-    .brand-name .letter:nth-child(2) { animation-delay: 0.62s; }
-    .brand-name .letter:nth-child(3) { animation-delay: 0.74s; }
-    .brand-name .letter:nth-child(4) { animation-delay: 0.86s; }
-    .brand-name .letter:nth-child(5) { animation-delay: 0.98s; }
-    .brand-name .letter:nth-child(6) { animation-delay: 1.10s; }
-    .brand-name .letter:nth-child(7) { animation-delay: 1.22s; }
+    .brand-name .l:nth-child(1){animation-delay:.55s}
+    .brand-name .l:nth-child(2){animation-delay:.66s}
+    .brand-name .l:nth-child(3){animation-delay:.77s}
+    .brand-name .l:nth-child(4){animation-delay:.88s}
+    .brand-name .l:nth-child(5){animation-delay:.99s}
+    .brand-name .l:nth-child(6){animation-delay:1.10s}
+    .brand-name .l:nth-child(7){animation-delay:1.21s}
+    @keyframes letterIn { to { opacity:1; transform:translateY(0); } }
 
-    @keyframes letterIn {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    /* ---- Subtítulo ---- */
     .welcome {
-      font-family: 'Nunito Sans', sans-serif;
       font-weight: 300;
-      font-size: 26px;
-      color: var(--navy);
-      margin-top: 10px;
-      letter-spacing: -0.005em;
+      font-size: 20px;
+      color: var(--muted);
+      margin-top: 6px;
+      letter-spacing: 0.01em;
     }
 
-    /* Ornamento decorativo */
+    /* ---- Ornamento ---- */
     .ornament {
       display: flex;
       align-items: center;
-      gap: 14px;
-      margin: 22px 0 30px;
-      color: var(--navy);
-      opacity: 0.55;
+      gap: 12px;
+      margin: 20px 0 26px;
+      color: rgba(28,58,94,0.3);
+      width: 100%;
+      justify-content: center;
     }
-    .ornament-line {
-      width: 60px;
+    .orn-line {
+      flex: 1;
+      max-width: 72px;
       height: 1px;
       background: currentColor;
       transform: scaleX(0);
-      animation: lineGrow 0.8s cubic-bezier(.2,.7,.2,1) 1.4s forwards;
+      animation: growLine 0.7s cubic-bezier(.18,.7,.2,1) 1.5s forwards;
     }
-    .ornament-line.left  { transform-origin: right center; }
-    .ornament-line.right { transform-origin: left  center; }
-    .ornament-diamond {
-      width: 6px;
-      height: 6px;
+    .orn-line:first-child { transform-origin: right; }
+    .orn-line:last-child  { transform-origin: left; }
+    .orn-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
       background: currentColor;
-      transform: rotate(45deg) scale(0);
-      animation: diamondIn 0.5s cubic-bezier(.2,.7,.2,1) 1.6s forwards;
+      transform: scale(0);
+      animation: popDot 0.4s cubic-bezier(.18,.7,.2,1) 1.75s forwards;
     }
+    @keyframes growLine { to { transform: scaleX(1); } }
+    @keyframes popDot   { to { transform: scale(1); } }
 
-    @keyframes lineGrow  { to { transform: scaleX(1); } }
-    @keyframes diamondIn { to { transform: rotate(45deg) scale(1); } }
-
+    /* ---- Formulário ---- */
     form {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 14px;
     }
 
-    /* Floating label fields */
     .field {
+      position: relative;
       width: 100%;
-      position: relative;
-    }
-
-    .input-wrap {
-      position: relative;
     }
 
     .field input {
       width: 100%;
       background: var(--input-bg);
-      border: 2px solid transparent;
-      border-radius: 999px;
-      padding: 16px 22px 14px;
+      border: 1.5px solid rgba(28,58,94,0.12);
+      border-radius: 14px;
+      padding: 18px 20px 10px;
       font-size: 15px;
       font-family: inherit;
       color: var(--navy);
       outline: none;
-      transition: all 0.3s cubic-bezier(.2,.7,.2,1);
+      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s;
     }
-
+    .field input:hover {
+      background: var(--input-hover);
+    }
     .field input:focus {
-      background: var(--input-bg-focus);
-      border-color: var(--navy);
-      box-shadow: 0 0 0 6px var(--navy-glow);
+      background: var(--white);
+      border-color: var(--navy-mid);
+      box-shadow: 0 0 0 4px var(--navy-glow);
       transform: translateY(-1px);
     }
-
     .field input::placeholder { color: transparent; }
 
-    .field .floating-label {
+    .floating-label {
       position: absolute;
+      left: 20px;
       top: 50%;
-      left: 22px;
       transform: translateY(-50%);
       font-size: 14px;
-      color: var(--text-muted);
+      color: var(--muted);
       pointer-events: none;
-      transition: all 0.25s cubic-bezier(.2,.7,.2,1);
+      transition: all 0.22s cubic-bezier(.18,.7,.2,1);
       background: transparent;
-      padding: 0 6px;
     }
-
     .field input:focus + .floating-label,
     .field input:not(:placeholder-shown) + .floating-label {
-      top: 0;
-      left: 18px;
-      font-size: 11px;
+      top: 9px;
+      transform: translateY(0);
+      font-size: 10.5px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      font-weight: 600;
-      color: var(--navy);
-      background: var(--paper);
+      font-weight: 700;
+      color: var(--navy-mid);
     }
 
+    .input-wrap { position: relative; }
     .input-wrap.has-icon input { padding-right: 50px; }
 
     .toggle-pw {
       position: absolute;
-      right: 16px;
-      top: 50%;
+      right: 14px; top: 50%;
       transform: translateY(-50%);
-      background: transparent;
-      border: none;
+      background: none; border: none;
       cursor: pointer;
-      color: var(--navy);
-      display: grid;
-      place-items: center;
+      color: var(--muted);
       padding: 6px;
-      border-radius: 50%;
-      transition: all 0.2s;
-      z-index: 2;
+      border-radius: 8px;
+      transition: color 0.2s, background 0.2s;
+      display: grid; place-items: center;
     }
     .toggle-pw:hover {
-      background: rgba(28, 58, 94, 0.1);
-      transform: translateY(-50%) scale(1.08);
+      color: var(--navy);
+      background: rgba(28,58,94,0.06);
     }
 
-    /* Linha esqueceu senha */
-    .forgot-row {
+    /* ---- Linha "esqueceu a senha" ---- */
+    .extra-row {
       display: flex;
       justify-content: flex-end;
-      margin-top: -4px;
+      margin-top: 2px;
     }
     .forgot-link {
-      font-size: 13px;
-      color: var(--text-muted);
+      font-size: 12.5px;
+      color: var(--muted);
       text-decoration: none;
       position: relative;
       transition: color 0.2s;
+      background: none; border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
     }
     .forgot-link::after {
       content: "";
-      position: absolute;
-      left: 0; bottom: -2px;
+      position: absolute; left: 0; bottom: -1px;
       width: 100%; height: 1px;
-      background: currentColor;
+      background: var(--navy-mid);
       transform: scaleX(0);
-      transform-origin: right center;
-      transition: transform 0.3s ease;
+      transform-origin: right;
+      transition: transform 0.25s ease;
     }
-    .forgot-link:hover {
-      color: var(--navy);
-    }
-    .forgot-link:hover::after {
-      transform: scaleX(1);
-      transform-origin: left center;
-    }
+    .forgot-link:hover { color: var(--navy); }
+    .forgot-link:hover::after { transform: scaleX(1); transform-origin: left; }
 
-    /* Botão */
+    /* ---- Botão ENTRAR ---- */
     .btn {
-      margin-top: 14px;
-      align-self: center;
-      padding: 15px 60px;
-      background: var(--navy);
+      margin-top: 8px;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 60%, var(--navy-deep) 100%);
       color: var(--white);
       border: none;
-      border-radius: 6px;
-      font-family: 'Nunito Sans', sans-serif;
+      border-radius: 14px;
+      font-family: inherit;
       font-weight: 700;
-      font-size: 14px;
+      font-size: 13.5px;
       letter-spacing: 0.14em;
       cursor: pointer;
-      transition: all 0.3s cubic-bezier(.2,.7,.2,1);
       position: relative;
       overflow: hidden;
-      min-width: 200px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 14px rgba(28,58,94,0.3);
     }
-
-    /* Shimmer effect */
     .btn::before {
       content: "";
-      position: absolute;
-      top: 0; left: -100%;
-      width: 100%; height: 100%;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.25),
-        transparent
-      );
-      transition: left 0.6s ease;
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.55s ease;
     }
-
     .btn:hover {
-      background: var(--navy-hover);
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(28, 58, 94, 0.3);
+      box-shadow: 0 8px 24px rgba(28,58,94,0.38);
     }
-    .btn:hover::before { left: 100%; }
+    .btn:hover::before { transform: translateX(100%); }
     .btn:active { transform: translateY(0); }
-
-    .btn:disabled {
-      cursor: wait;
-      opacity: 0.85;
-    }
-
+    .btn:disabled { cursor: wait; opacity: 0.8; }
     .btn-text { position: relative; z-index: 1; }
 
-    /* Spinner */
     .spinner {
-      width: 16px;
-      height: 16px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-top-color: var(--white);
+      width: 15px; height: 15px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: #fff;
       border-radius: 50%;
-      animation: spin 0.6s linear infinite;
+      animation: spin 0.65s linear infinite;
       display: none;
     }
     .btn.loading .spinner { display: inline-block; }
-    .btn.loading .btn-text { opacity: 0.85; }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ----------- LADO DIREITO (cerejeira + pétalas) ----------- */
+    /* ---- Rodapé da versão ---- */
+    .version-tag {
+      margin-top: 22px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(28,58,94,0.28);
+    }
+
+    /* ---- Toast "esqueceu a senha" ---- */
+    .toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--navy);
+      color: var(--white);
+      padding: 14px 22px;
+      border-radius: 14px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(28,58,94,0.35);
+      max-width: 320px;
+      width: calc(100% - 48px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.18,.7,.2,1);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .toast-icon {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: grid; place-items: center;
+    }
+
+    /* ===================== LADO DIREITO ===================== */
     .right-side {
       position: relative;
       background-image: url('cerejeira.jpg');
@@ -384,54 +402,50 @@
       overflow: hidden;
     }
 
-    /* Transição suave da esquerda (branco) para a foto */
+    /* Transição suave: faixa branca que "dissolve" na foto */
     .right-side::before {
       content: "";
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background: linear-gradient(
         to right,
-        var(--paper) 0%,
-        rgba(250, 251, 252, 0.55) 12%,
-        rgba(250, 251, 252, 0.0) 32%
+        var(--paper)           0%,
+        rgba(248,249,251,0.82) 8%,
+        rgba(248,249,251,0.42) 18%,
+        rgba(248,249,251,0.10) 30%,
+        transparent            46%
       );
       pointer-events: none;
       z-index: 2;
     }
 
-    /* Vinheta sutil pra dar profundidade nas bordas */
+    /* Vinheta nas demais bordas */
     .right-side::after {
       content: "";
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at center, transparent 50%, rgba(120, 60, 80, 0.25) 100%),
-        linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 30%, transparent 70%, rgba(80, 30, 50, 0.15) 100%);
+        radial-gradient(ellipse at center, transparent 45%, rgba(100,40,60,0.22) 100%),
+        linear-gradient(to bottom, rgba(255,255,255,0.06) 0%, transparent 25%, transparent 75%, rgba(60,20,35,0.14) 100%);
       pointer-events: none;
       z-index: 1;
     }
 
     #petals {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
       z-index: 3;
     }
 
-    /* ----------- RESPONSIVO ----------- */
+    /* ===================== RESPONSIVO ===================== */
     @media (max-width: 860px) {
       body { overflow: auto; }
       .page { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
       .right-side { display: none; }
-      .login-side { min-height: 100vh; padding: 32px 24px; }
-      .logo { width: 150px; }
-      .brand-name { font-size: 42px; }
-      .welcome { font-size: 22px; }
+      .login-side { min-height: 100vh; padding: 28px 20px; }
+      .card { padding: 36px 28px 32px; }
+      .logo { width: 160px; }
     }
 
-    /* Prefere movimento reduzido */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -442,260 +456,254 @@
   </style>
 </head>
 <body>
-  <div class="page">
+<div class="page">
 
-    <!-- LADO LOGIN -->
-    <section class="login-side">
-      <canvas id="particles"></canvas>
+  <!-- ========== LADO ESQUERDO ========== -->
+  <section class="login-side">
+    <canvas id="particles"></canvas>
 
-      <div class="login-wrap">
-        <img src="logo_odin.png" alt="O.D.I.N logo" class="logo" />
+    <div class="card">
+      <img src="logo_odin.png" alt="Logo O.D.I.N" class="logo" />
 
-        <h1 class="brand-name" aria-label="O.D.I.N">
-          <span class="letter">O</span>
-          <span class="letter">.</span>
-          <span class="letter">D</span>
-          <span class="letter">.</span>
-          <span class="letter">I</span>
-          <span class="letter">.</span>
-          <span class="letter">N</span>
-        </h1>
+      <h1 class="brand-name" aria-label="O.D.I.N">
+        <span class="l">O</span><span class="l">.</span><span class="l">D</span><span class="l">.</span><span class="l">I</span><span class="l">.</span><span class="l">N</span>
+      </h1>
 
-        <p class="welcome anim-in delay-4">Seja bem-vindo</p>
+      <p class="welcome fade-up d3">Seja bem-vindo</p>
 
-        <div class="ornament" aria-hidden="true">
-          <div class="ornament-line left"></div>
-          <div class="ornament-diamond"></div>
-          <div class="ornament-line right"></div>
+      <div class="ornament" aria-hidden="true">
+        <div class="orn-line"></div>
+        <div class="orn-dot"></div>
+        <div class="orn-dot"></div>
+        <div class="orn-dot"></div>
+        <div class="orn-line"></div>
+      </div>
+
+      <form id="loginForm" novalidate class="fade-up d5">
+        <div class="field">
+          <div class="input-wrap">
+            <input type="text" id="user" name="user" placeholder=" " required autocomplete="username" />
+            <label for="user" class="floating-label">Usuário</label>
+          </div>
         </div>
 
-        <form id="loginForm" novalidate class="anim-in delay-5" style="animation-delay: 1.7s;">
-          <div class="field">
-            <div class="input-wrap">
-              <input type="text" id="user" name="user" placeholder=" " required autocomplete="username" />
-              <label for="user" class="floating-label">Informe seu usuário</label>
-            </div>
+        <div class="field">
+          <div class="input-wrap has-icon">
+            <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
+            <label for="password" class="floating-label">Senha</label>
+            <button type="button" class="toggle-pw" id="togglePw" aria-label="Mostrar senha">
+              <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </button>
           </div>
+        </div>
 
-          <div class="field">
-            <div class="input-wrap has-icon">
-              <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
-              <label for="password" class="floating-label">Informe sua senha</label>
-              <button type="button" class="toggle-pw" id="togglePw" aria-label="Mostrar senha">
-                <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-              </button>
-            </div>
-          </div>
+        <div class="extra-row">
+          <button type="button" class="forgot-link" id="forgotBtn">Esqueceu a senha?</button>
+        </div>
 
-          <div class="forgot-row">
-            <a href="#" class="forgot-link">Esqueceu a senha?</a>
-          </div>
+        <button type="submit" class="btn" id="submitBtn">
+          <span class="btn-text">ENTRAR</span>
+          <span class="spinner" aria-hidden="true"></span>
+        </button>
+      </form>
 
-          <button type="submit" class="btn" id="submitBtn">
-            <span class="btn-text">ENTRAR</span>
-            <span class="spinner" aria-hidden="true"></span>
-          </button>
-        </form>
-      </div>
-    </section>
+      <p class="version-tag fade-up d6">Sistema O.D.I.N · v1.0</p>
+    </div>
+  </section>
 
-    <!-- LADO DIREITO (cerejeira + pétalas) -->
-    <section class="right-side">
-      <canvas id="petals"></canvas>
-    </section>
+  <!-- ========== LADO DIREITO ========== -->
+  <section class="right-side">
+    <canvas id="petals"></canvas>
+  </section>
 
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <div class="toast-icon">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
   </div>
+  <span>Para redefinir sua senha, por gentileza, fale com um administrador.</span>
+</div>
 
-  <script>
-    /* ========== PARTÍCULAS FLUTUANTES ========== */
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    let W, H;
+<script>
+  /* ========== PARTÍCULAS ========== */
+  const canvas = document.getElementById('particles');
+  const ctx    = canvas.getContext('2d');
+  let particles = [], W, H;
 
-    function resize() {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      W = canvas.width  = rect.width  * devicePixelRatio;
-      H = canvas.height = rect.height * devicePixelRatio;
-      canvas.style.width  = rect.width  + 'px';
-      canvas.style.height = rect.height + 'px';
-    }
-    resize();
-    window.addEventListener('resize', resize);
+  function resizeParticles() {
+    const r = canvas.parentElement.getBoundingClientRect();
+    W = canvas.width  = r.width  * devicePixelRatio;
+    H = canvas.height = r.height * devicePixelRatio;
+    canvas.style.width  = r.width  + 'px';
+    canvas.style.height = r.height + 'px';
+  }
+  resizeParticles();
+  window.addEventListener('resize', resizeParticles);
 
-    function createParticles(count) {
-      particles = [];
-      for (let i = 0; i < count; i++) {
-        particles.push({
-          x: Math.random() * W,
-          y: Math.random() * H,
-          r: (Math.random() * 1.6 + 0.4) * devicePixelRatio,
-          vx: (Math.random() - 0.5) * 0.15,
-          vy: -Math.random() * 0.25 - 0.05,
-          alpha: Math.random() * 0.35 + 0.1,
-          phase: Math.random() * Math.PI * 2
-        });
-      }
-    }
-    createParticles(45);
+  for (let i = 0; i < 40; i++) particles.push({
+    x: Math.random() * 2000,
+    y: Math.random() * 1200,
+    r: (Math.random() * 1.4 + 0.4) * devicePixelRatio,
+    vx: (Math.random() - 0.5) * 0.12,
+    vy: -(Math.random() * 0.22 + 0.05),
+    alpha: Math.random() * 0.28 + 0.08,
+    phase: Math.random() * Math.PI * 2
+  });
 
-    function animate(t) {
-      ctx.clearRect(0, 0, W, H);
-      particles.forEach(p => {
-        p.x += p.vx + Math.sin((t / 2000) + p.phase) * 0.15;
-        p.y += p.vy;
-        if (p.y < -10)        { p.y = H + 10; p.x = Math.random() * W; }
-        if (p.x < -10)        p.x = W + 10;
-        if (p.x > W + 10)     p.x = -10;
-
-        const twinkle = 0.7 + 0.3 * Math.sin(t / 800 + p.phase);
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(28, 58, 94, ${p.alpha * twinkle})`;
-        ctx.fill();
-      });
-      requestAnimationFrame(animate);
-    }
-    requestAnimationFrame(animate);
-
-    /* ========== MOSTRAR / OCULTAR SENHA ========== */
-    const pwInput   = document.getElementById('password');
-    const toggleBtn = document.getElementById('togglePw');
-    const eyeIcon   = document.getElementById('eyeIcon');
-
-    const eyeOpen = `
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
-    `;
-    const eyeClosed = `
-      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-      <line x1="1" y1="1" x2="23" y2="23"/>
-    `;
-
-    toggleBtn.addEventListener('click', () => {
-      const isPw = pwInput.type === 'password';
-      pwInput.type = isPw ? 'text' : 'password';
-      eyeIcon.innerHTML = isPw ? eyeClosed : eyeOpen;
-      toggleBtn.setAttribute('aria-label', isPw ? 'Ocultar senha' : 'Mostrar senha');
+  (function animPart(t) {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx + Math.sin(t / 2200 + p.phase) * 0.12;
+      p.y += p.vy;
+      if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
+      if (p.x < -10) p.x = W + 10;
+      if (p.x > W + 10) p.x = -10;
+      const tw = 0.65 + 0.35 * Math.sin(t / 900 + p.phase);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(28,58,94,${p.alpha * tw})`;
+      ctx.fill();
     });
+    requestAnimationFrame(animPart);
+  })(0);
 
-    /* ========== SUBMIT ========== */
-    const form      = document.getElementById('loginForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const btnText   = submitBtn.querySelector('.btn-text');
+  /* ========== OLHO (mostrar/ocultar senha) ========== */
+  const pwInput   = document.getElementById('password');
+  const toggleBtn = document.getElementById('togglePw');
+  const eyeIcon   = document.getElementById('eyeIcon');
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const user = document.getElementById('user').value.trim();
-      const pass = pwInput.value;
+  const eyeOpen   = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
+  const eyeClosed = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
 
-      if (!user || !pass) {
-        btnText.textContent = 'PREENCHA OS CAMPOS';
-        submitBtn.style.background = '#a23b3b';
-        setTimeout(() => {
-          btnText.textContent = 'ENTRAR';
-          submitBtn.style.background = '';
-        }, 1800);
-        return;
-      }
+  toggleBtn.addEventListener('click', () => {
+    const show = pwInput.type === 'password';
+    pwInput.type = show ? 'text' : 'password';
+    eyeIcon.innerHTML = show ? eyeClosed : eyeOpen;
+    toggleBtn.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
+  });
 
-      submitBtn.classList.add('loading');
-      submitBtn.disabled = true;
-      btnText.textContent = 'ENTRANDO';
+  /* ========== TOAST "ESQUECEU A SENHA" ========== */
+  const toast     = document.getElementById('toast');
+  const forgotBtn = document.getElementById('forgotBtn');
+  let toastTimer;
 
-      // simulação — substitua pela chamada real de autenticação
+  forgotBtn.addEventListener('click', () => {
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 4500);
+  });
+
+  /* ========== SUBMIT ========== */
+  const form      = document.getElementById('loginForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const btnText   = submitBtn.querySelector('.btn-text');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const user = document.getElementById('user').value.trim();
+    const pass = pwInput.value;
+
+    if (!user || !pass) {
+      btnText.textContent = 'PREENCHA OS CAMPOS';
+      submitBtn.style.background = 'linear-gradient(135deg,#8b2c2c,#6b1f1f)';
       setTimeout(() => {
-        submitBtn.classList.remove('loading');
-        btnText.textContent = 'BEM-VINDO ✓';
-        submitBtn.style.background = '#2d6a4f';
-        // aqui você faria o redirecionamento ou a chamada à API
-      }, 1400);
+        btnText.textContent = 'ENTRAR';
+        submitBtn.style.background = '';
+      }, 2000);
+      return;
+    }
+
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
+    btnText.textContent = 'ENTRANDO';
+
+    // ← substitua pelo seu fetch/autenticação real
+    setTimeout(() => {
+      submitBtn.classList.remove('loading');
+      btnText.textContent = 'BEM-VINDO ✓';
+      submitBtn.style.background = 'linear-gradient(135deg,#2d6a4f,#1e4d39)';
+    }, 1400);
+  });
+
+  /* ========== PÉTALAS ========== */
+  const pc   = document.getElementById('petals');
+  const pCtx = pc.getContext('2d');
+  let petals = [], pW, pH;
+
+  function resizePetals() {
+    const r = pc.parentElement.getBoundingClientRect();
+    pW = pc.width  = r.width  * devicePixelRatio;
+    pH = pc.height = r.height * devicePixelRatio;
+    pc.style.width  = r.width  + 'px';
+    pc.style.height = r.height + 'px';
+  }
+  resizePetals();
+  window.addEventListener('resize', () => { resizePetals(); initPetals(); });
+
+  const petalColors = [
+    [255,182,193],[255,160,180],[250,145,168],[255,200,210],[240,128,158],[255,220,228]
+  ];
+
+  function mkPetal(fresh = false) {
+    const s = (Math.random() * 9 + 5) * devicePixelRatio;
+    const c = petalColors[Math.floor(Math.random() * petalColors.length)];
+    return {
+      x: Math.random() * pW,
+      y: fresh ? -s * 2 : Math.random() * pH,
+      s, c,
+      vy:  (Math.random() * 0.65 + 0.3)  * devicePixelRatio,
+      vx:  (Math.random() - 0.5) * 0.35  * devicePixelRatio,
+      rot: Math.random() * Math.PI * 2,
+      rs:  (Math.random() - 0.5) * 0.022,
+      sw:  Math.random() * Math.PI * 2,
+      swr: Math.random() * 0.55 + 0.18,
+      sws: Math.random() * 0.011 + 0.005,
+      a:   Math.random() * 0.4 + 0.45,
+    };
+  }
+
+  function initPetals() { petals = Array.from({length: 42}, () => mkPetal(false)); }
+  initPetals();
+
+  function drawPetal(p) {
+    pCtx.save();
+    pCtx.translate(p.x, p.y);
+    pCtx.rotate(p.rot);
+    pCtx.globalAlpha = p.a;
+    pCtx.beginPath();
+    pCtx.scale(1, 0.52);
+    pCtx.arc(0, 0, p.s, 0, Math.PI * 2);
+    pCtx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},0.88)`;
+    pCtx.fill();
+    pCtx.beginPath();
+    pCtx.scale(0.52, 0.88);
+    pCtx.arc(p.s * 0.18, -p.s * 0.12, p.s * 0.48, 0, Math.PI * 2);
+    pCtx.fillStyle = 'rgba(255,255,255,0.3)';
+    pCtx.fill();
+    pCtx.restore();
+  }
+
+  (function animPetals() {
+    pCtx.clearRect(0, 0, pW, pH);
+    petals.forEach(p => {
+      p.sw += p.sws;
+      p.x  += p.vx + Math.sin(p.sw) * p.swr * devicePixelRatio;
+      p.y  += p.vy;
+      p.rot += p.rs;
+      if (p.y > pH + p.s * 2) Object.assign(p, mkPetal(true));
+      drawPetal(p);
     });
-
-    /* ========== PÉTALAS CAINDO ========== */
-    const petalCanvas = document.getElementById('petals');
-    const pCtx = petalCanvas.getContext('2d');
-    let petals = [];
-    let pW, pH;
-
-    function resizePetals() {
-      const r = petalCanvas.parentElement.getBoundingClientRect();
-      pW = petalCanvas.width  = r.width  * devicePixelRatio;
-      pH = petalCanvas.height = r.height * devicePixelRatio;
-      petalCanvas.style.width  = r.width  + 'px';
-      petalCanvas.style.height = r.height + 'px';
-    }
-    resizePetals();
-    window.addEventListener('resize', () => { resizePetals(); spawnPetals(); });
-
-    const petalColors = [
-      'rgba(255,182,193,',
-      'rgba(255,160,180,',
-      'rgba(250,145,168,',
-      'rgba(255,200,210,',
-      'rgba(240,128,158,',
-      'rgba(255,220,228,',
-    ];
-
-    function makePetal(fromTop = false) {
-      const size = (Math.random() * 10 + 6) * devicePixelRatio;
-      return {
-        x:       Math.random() * pW,
-        y:       fromTop ? -size * 2 : Math.random() * pH,
-        size,
-        speedY:  (Math.random() * 0.7 + 0.35) * devicePixelRatio,
-        speedX:  (Math.random() - 0.5) * 0.4 * devicePixelRatio,
-        rot:     Math.random() * Math.PI * 2,
-        rotSpd:  (Math.random() - 0.5) * 0.025,
-        swing:   Math.random() * Math.PI * 2,
-        swingR:  Math.random() * 0.6 + 0.2,
-        swingSpd:Math.random() * 0.012 + 0.006,
-        alpha:   Math.random() * 0.45 + 0.45,
-        color:   petalColors[Math.floor(Math.random() * petalColors.length)],
-      };
-    }
-
-    function spawnPetals() {
-      petals = Array.from({ length: 38 }, () => makePetal(false));
-    }
-    spawnPetals();
-
-    function drawPetal(p) {
-      pCtx.save();
-      pCtx.translate(p.x, p.y);
-      pCtx.rotate(p.rot);
-      pCtx.globalAlpha = p.alpha;
-      // corpo da pétala
-      pCtx.beginPath();
-      pCtx.scale(1, 0.55);
-      pCtx.arc(0, 0, p.size, 0, Math.PI * 2);
-      pCtx.fillStyle = `${p.color}0.88)`;
-      pCtx.fill();
-      // reflexo interno suave
-      pCtx.beginPath();
-      pCtx.scale(0.55, 0.9);
-      pCtx.arc(p.size * 0.2, -p.size * 0.1, p.size * 0.5, 0, Math.PI * 2);
-      pCtx.fillStyle = 'rgba(255,255,255,0.32)';
-      pCtx.fill();
-      pCtx.restore();
-    }
-
-    function animatePetals() {
-      pCtx.clearRect(0, 0, pW, pH);
-      petals.forEach(p => {
-        p.swing += p.swingSpd;
-        p.x += p.speedX + Math.sin(p.swing) * p.swingR * devicePixelRatio;
-        p.y += p.speedY;
-        p.rot += p.rotSpd;
-        if (p.y > pH + p.size * 2) Object.assign(p, makePetal(true));
-        drawPetal(p);
-      });
-      requestAnimationFrame(animatePetals);
-    }
-    requestAnimationFrame(animatePetals);
-  </script>
+    requestAnimationFrame(animPetals);
+  })();
+</script>
 </body>
 </html>
