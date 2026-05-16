@@ -6,17 +6,17 @@
   <title>O.D.I.N — Entrar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --navy:       #1c3a5e;
       --navy-deep:  #14294a;
-      --navy-mid:   #25497a;
+      --navy-hover: #25497a;
       --navy-glow:  rgba(28, 58, 94, 0.15);
-      --input-bg:   rgba(28, 58, 94, 0.07);
-      --input-hover:rgba(28, 58, 94, 0.11);
-      --muted:      #6b82a0;
-      --paper:      #f8f9fb;
+      --input-bg:   #d4dde3;
+      --input-focus:#c5d2da;
+      --muted:      #5a7088;
+      --paper:      #fafbfc;
       --white:      #ffffff;
     }
 
@@ -43,45 +43,35 @@
       align-items: center;
       justify-content: center;
       padding: 40px;
-      background: var(--paper);
       overflow: hidden;
-      z-index: 2;
+      background:
+        radial-gradient(ellipse at top left,    rgba(28,58,94,0.04), transparent 60%),
+        radial-gradient(ellipse at bottom right, rgba(28,58,94,0.03), transparent 60%),
+        var(--paper);
     }
 
-    /* Gradiente radial de fundo */
+    /* Textura de papel sutil */
     .login-side::before {
       content: "";
       position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 10%, rgba(28,58,94,0.055) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 50% at 85% 90%, rgba(28,58,94,0.04) 0%, transparent 70%);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.11 0 0 0 0 0.23 0 0 0 0 0.37 0 0 0 0.04 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+      opacity: 0.7;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Partículas */
     #particles {
       position: absolute; inset: 0;
       pointer-events: none;
       z-index: 1;
     }
 
-    /* ---- CARD ---- */
-    .card {
+    /* ---- Conteúdo do login ---- */
+    .login-wrap {
       position: relative;
       z-index: 3;
       width: 100%;
-      max-width: 390px;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: blur(18px) saturate(1.4);
-      -webkit-backdrop-filter: blur(18px) saturate(1.4);
-      border: 1px solid rgba(28,58,94,0.09);
-      border-radius: 24px;
-      box-shadow:
-        0 2px 4px rgba(28,58,94,0.04),
-        0 8px 24px rgba(28,58,94,0.07),
-        0 32px 64px rgba(28,58,94,0.06);
-      padding: 44px 40px 40px;
+      max-width: 380px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -91,42 +81,31 @@
     /* ---- Animações de entrada ---- */
     .fade-up {
       opacity: 0;
-      transform: translateY(14px);
-      animation: fadeUp 0.75s cubic-bezier(.18,.7,.2,1) forwards;
+      transform: translateY(12px);
+      animation: fadeUp 0.8s cubic-bezier(.2,.7,.2,1) forwards;
     }
-    .d1 { animation-delay: 0.10s; }
-    .d2 { animation-delay: 0.30s; }
-    .d3 { animation-delay: 0.50s; }
-    .d4 { animation-delay: 0.70s; }
-    .d5 { animation-delay: 0.90s; }
-    .d6 { animation-delay: 1.10s; }
-
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
+    .d1{animation-delay:.10s} .d2{animation-delay:.30s}
+    .d3{animation-delay:.50s} .d4{animation-delay:.75s}
+    .d5{animation-delay:.95s} .d6{animation-delay:1.15s}
+    @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
 
     /* ---- Logo ---- */
     .logo {
-      width: 200px;
-      height: auto;
-      margin-bottom: 10px;
-      filter: drop-shadow(0 8px 20px rgba(28,58,94,0.14));
+      width: 240px; height: auto;
+      margin-bottom: 14px;
+      filter: drop-shadow(0 6px 22px rgba(28,58,94,0.12));
       opacity: 0;
-      transform: translateY(14px) scale(0.97);
+      transform: translateY(12px);
       animation:
-        logoIn  0.9s cubic-bezier(.18,.7,.2,1) 0.1s forwards,
-        breathe 7s  ease-in-out 2s infinite;
-    }
-
-    @keyframes logoIn {
-      to { opacity: 1; transform: translateY(0) scale(1); }
+        fadeUp  0.9s cubic-bezier(.2,.7,.2,1) 0.1s  forwards,
+        breathe 7s  ease-in-out              2s    infinite;
     }
     @keyframes breathe {
-      0%,100% { transform: translateY(0) scale(1); }
+      0%,100% { transform: translateY(0)   scale(1);     }
       50%     { transform: translateY(-4px) scale(1.018); }
     }
 
-    /* ---- Título letter-by-letter ---- */
+    /* ---- Título O.D.I.N ---- */
     .brand-name {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 700;
@@ -141,7 +120,7 @@
       display: inline-block;
       opacity: 0;
       transform: translateY(16px);
-      animation: letterIn 0.55s cubic-bezier(.18,.7,.2,1) forwards;
+      animation: letterIn 0.55s cubic-bezier(.2,.7,.2,1) forwards;
     }
     .brand-name .l:nth-child(1){animation-delay:.55s}
     .brand-name .l:nth-child(2){animation-delay:.66s}
@@ -152,101 +131,90 @@
     .brand-name .l:nth-child(7){animation-delay:1.21s}
     @keyframes letterIn { to { opacity:1; transform:translateY(0); } }
 
-    /* ---- Subtítulo ---- */
     .welcome {
       font-weight: 300;
-      font-size: 20px;
-      color: var(--muted);
-      margin-top: 6px;
-      letter-spacing: 0.01em;
+      font-size: 26px;
+      color: var(--navy);
+      margin-top: 8px;
+      letter-spacing: -0.005em;
     }
 
     /* ---- Ornamento ---- */
     .ornament {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin: 20px 0 26px;
-      color: rgba(28,58,94,0.3);
-      width: 100%;
-      justify-content: center;
+      gap: 14px;
+      margin: 22px 0 28px;
+      color: var(--navy);
+      opacity: 0.45;
     }
     .orn-line {
-      flex: 1;
-      max-width: 72px;
-      height: 1px;
+      width: 60px; height: 1px;
       background: currentColor;
       transform: scaleX(0);
-      animation: growLine 0.7s cubic-bezier(.18,.7,.2,1) 1.5s forwards;
+      animation: growLine 0.8s cubic-bezier(.2,.7,.2,1) 1.4s forwards;
     }
     .orn-line:first-child { transform-origin: right; }
     .orn-line:last-child  { transform-origin: left; }
-    .orn-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
+    .orn-diamond {
+      width: 6px; height: 6px;
       background: currentColor;
-      transform: scale(0);
-      animation: popDot 0.4s cubic-bezier(.18,.7,.2,1) 1.75s forwards;
+      transform: rotate(45deg) scale(0);
+      animation: popDiamond 0.5s cubic-bezier(.2,.7,.2,1) 1.6s forwards;
     }
-    @keyframes growLine { to { transform: scaleX(1); } }
-    @keyframes popDot   { to { transform: scale(1); } }
+    @keyframes growLine    { to { transform: scaleX(1); } }
+    @keyframes popDiamond  { to { transform: rotate(45deg) scale(1); } }
 
     /* ---- Formulário ---- */
     form {
       width: 100%;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
 
-    .field {
-      position: relative;
-      width: 100%;
-    }
+    .field { position: relative; width: 100%; }
 
     .field input {
       width: 100%;
       background: var(--input-bg);
-      border: 1.5px solid rgba(28,58,94,0.12);
-      border-radius: 14px;
-      padding: 18px 20px 10px;
+      border: 2px solid transparent;
+      border-radius: 999px;
+      padding: 16px 22px 14px;
       font-size: 15px;
       font-family: inherit;
       color: var(--navy);
       outline: none;
-      transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s;
-    }
-    .field input:hover {
-      background: var(--input-hover);
+      transition: all 0.3s cubic-bezier(.2,.7,.2,1);
     }
     .field input:focus {
-      background: var(--white);
-      border-color: var(--navy-mid);
-      box-shadow: 0 0 0 4px var(--navy-glow);
+      background: var(--input-focus);
+      border-color: var(--navy);
+      box-shadow: 0 0 0 6px var(--navy-glow);
       transform: translateY(-1px);
     }
     .field input::placeholder { color: transparent; }
 
     .floating-label {
       position: absolute;
-      left: 20px;
-      top: 50%;
+      top: 50%; left: 22px;
       transform: translateY(-50%);
       font-size: 14px;
       color: var(--muted);
       pointer-events: none;
-      transition: all 0.22s cubic-bezier(.18,.7,.2,1);
-      background: transparent;
+      transition: all 0.25s cubic-bezier(.2,.7,.2,1);
     }
     .field input:focus + .floating-label,
     .field input:not(:placeholder-shown) + .floating-label {
-      top: 9px;
-      transform: translateY(0);
+      top: 0; left: 18px;
+      transform: translateY(-50%);
       font-size: 10.5px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       font-weight: 700;
-      color: var(--navy-mid);
+      color: var(--navy);
+      background: var(--paper);
+      padding: 0 5px;
     }
 
     .input-wrap { position: relative; }
@@ -260,37 +228,38 @@
       cursor: pointer;
       color: var(--muted);
       padding: 6px;
-      border-radius: 8px;
-      transition: color 0.2s, background 0.2s;
+      border-radius: 50%;
+      transition: all 0.2s;
       display: grid; place-items: center;
     }
     .toggle-pw:hover {
       color: var(--navy);
-      background: rgba(28,58,94,0.06);
+      background: rgba(28,58,94,0.08);
+      transform: translateY(-50%) scale(1.08);
     }
 
-    /* ---- Linha "esqueceu a senha" ---- */
+    /* ---- Extra row ---- */
     .extra-row {
       display: flex;
       justify-content: flex-end;
-      margin-top: 2px;
+      margin-top: -2px;
     }
     .forgot-link {
       font-size: 12.5px;
       color: var(--muted);
       text-decoration: none;
-      position: relative;
-      transition: color 0.2s;
       background: none; border: none;
       cursor: pointer;
       font-family: inherit;
       padding: 0;
+      position: relative;
+      transition: color 0.2s;
     }
     .forgot-link::after {
       content: "";
       position: absolute; left: 0; bottom: -1px;
       width: 100%; height: 1px;
-      background: var(--navy-mid);
+      background: var(--navy);
       transform: scaleX(0);
       transform-origin: right;
       transition: transform 0.25s ease;
@@ -298,15 +267,15 @@
     .forgot-link:hover { color: var(--navy); }
     .forgot-link:hover::after { transform: scaleX(1); transform-origin: left; }
 
-    /* ---- Botão ENTRAR ---- */
+    /* ---- Botão ---- */
     .btn {
-      margin-top: 8px;
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--navy-mid) 0%, var(--navy) 60%, var(--navy-deep) 100%);
+      margin-top: 6px;
+      align-self: center;
+      padding: 15px 60px;
+      background: linear-gradient(135deg, var(--navy-hover) 0%, var(--navy) 55%, var(--navy-deep) 100%);
       color: var(--white);
       border: none;
-      border-radius: 14px;
+      border-radius: 8px;
       font-family: inherit;
       font-weight: 700;
       font-size: 13.5px;
@@ -318,25 +287,21 @@
       align-items: center;
       justify-content: center;
       gap: 10px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 14px rgba(28,58,94,0.3);
+      transition: transform 0.2s, box-shadow 0.25s;
+      box-shadow: 0 4px 16px rgba(28,58,94,0.28);
     }
     .btn::before {
       content: "";
       position: absolute; inset: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
       transform: translateX(-100%);
       transition: transform 0.55s ease;
     }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(28,58,94,0.38);
-    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(28,58,94,0.38); }
     .btn:hover::before { transform: translateX(100%); }
     .btn:active { transform: translateY(0); }
-    .btn:disabled { cursor: wait; opacity: 0.8; }
+    .btn:disabled { cursor: wait; opacity: 0.82; }
     .btn-text { position: relative; z-index: 1; }
-
     .spinner {
       width: 15px; height: 15px;
       border: 2px solid rgba(255,255,255,0.35);
@@ -348,25 +313,15 @@
     .btn.loading .spinner { display: inline-block; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ---- Rodapé da versão ---- */
-    .version-tag {
-      margin-top: 22px;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(28,58,94,0.28);
-    }
-
-    /* ---- Toast "esqueceu a senha" ---- */
+    /* ---- Toast ---- */
     .toast {
       position: fixed;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
+      bottom: 32px; left: 50%;
+      transform: translateX(-50%) translateY(16px);
       background: var(--navy);
       color: var(--white);
-      padding: 14px 22px;
-      border-radius: 14px;
+      padding: 14px 20px;
+      border-radius: 12px;
       font-size: 13.5px;
       line-height: 1.5;
       text-align: center;
@@ -375,7 +330,7 @@
       width: calc(100% - 48px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.18,.7,.2,1);
+      transition: opacity 0.35s ease, transform 0.35s cubic-bezier(.2,.7,.2,1);
       z-index: 100;
       display: flex;
       align-items: center;
@@ -387,7 +342,7 @@
     }
     .toast-icon {
       flex-shrink: 0;
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       background: rgba(255,255,255,0.15);
       border-radius: 50%;
       display: grid; place-items: center;
@@ -402,23 +357,23 @@
       overflow: hidden;
     }
 
-    /* Transição suave: faixa branca que "dissolve" na foto */
+    /* Transição suave branco → foto */
     .right-side::before {
       content: "";
       position: absolute; inset: 0;
       background: linear-gradient(
         to right,
-        var(--paper)           0%,
-        rgba(248,249,251,0.82) 8%,
-        rgba(248,249,251,0.42) 18%,
-        rgba(248,249,251,0.10) 30%,
-        transparent            46%
+        var(--paper)              0%,
+        rgba(250,251,252,0.80)    8%,
+        rgba(250,251,252,0.40)   20%,
+        rgba(250,251,252,0.08)   34%,
+        transparent              50%
       );
       pointer-events: none;
       z-index: 2;
     }
 
-    /* Vinheta nas demais bordas */
+    /* Vinheta bordas */
     .right-side::after {
       content: "";
       position: absolute; inset: 0;
@@ -429,11 +384,14 @@
       z-index: 1;
     }
 
-    #petals {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
+    /* Pétalas SVG caindo */
+    .petal-el {
+      position: absolute;
+      top: -80px;
       pointer-events: none;
       z-index: 3;
+      will-change: transform;
+      user-select: none;
     }
 
     /* ===================== RESPONSIVO ===================== */
@@ -441,11 +399,9 @@
       body { overflow: auto; }
       .page { grid-template-columns: 1fr; height: auto; min-height: 100vh; }
       .right-side { display: none; }
-      .login-side { min-height: 100vh; padding: 28px 20px; }
-      .card { padding: 36px 28px 32px; }
-      .logo { width: 160px; }
+      .login-side { min-height: 100vh; padding: 32px 24px; }
+      .logo { width: 180px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         animation-duration: 0.01ms !important;
@@ -458,11 +414,11 @@
 <body>
 <div class="page">
 
-  <!-- ========== LADO ESQUERDO ========== -->
+  <!-- ===== LADO ESQUERDO ===== -->
   <section class="login-side">
     <canvas id="particles"></canvas>
 
-    <div class="card">
+    <div class="login-wrap">
       <img src="logo_odin.png" alt="Logo O.D.I.N" class="logo" />
 
       <h1 class="brand-name" aria-label="O.D.I.N">
@@ -473,9 +429,7 @@
 
       <div class="ornament" aria-hidden="true">
         <div class="orn-line"></div>
-        <div class="orn-dot"></div>
-        <div class="orn-dot"></div>
-        <div class="orn-dot"></div>
+        <div class="orn-diamond"></div>
         <div class="orn-line"></div>
       </div>
 
@@ -483,14 +437,14 @@
         <div class="field">
           <div class="input-wrap">
             <input type="text" id="user" name="user" placeholder=" " required autocomplete="username" />
-            <label for="user" class="floating-label">Usuário</label>
+            <label for="user" class="floating-label">Informe seu usuário</label>
           </div>
         </div>
 
         <div class="field">
           <div class="input-wrap has-icon">
             <input type="password" id="password" name="password" placeholder=" " required autocomplete="current-password" />
-            <label for="password" class="floating-label">Senha</label>
+            <label for="password" class="floating-label">Informe sua senha</label>
             <button type="button" class="toggle-pw" id="togglePw" aria-label="Mostrar senha">
               <svg id="eyeIcon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
@@ -509,22 +463,18 @@
           <span class="spinner" aria-hidden="true"></span>
         </button>
       </form>
-
-      <p class="version-tag fade-up d6">Sistema O.D.I.N · v1.0</p>
     </div>
   </section>
 
-  <!-- ========== LADO DIREITO ========== -->
-  <section class="right-side">
-    <canvas id="petals"></canvas>
-  </section>
+  <!-- ===== LADO DIREITO ===== -->
+  <section class="right-side" id="rightSide"></section>
 
 </div>
 
 <!-- Toast -->
 <div class="toast" id="toast" role="alert" aria-live="polite">
   <div class="toast-icon">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="10"/>
       <line x1="12" y1="8" x2="12" y2="12"/>
       <line x1="12" y1="16" x2="12.01" y2="16"/>
@@ -534,34 +484,33 @@
 </div>
 
 <script>
-  /* ========== PARTÍCULAS ========== */
+  /* ========== PARTÍCULAS (lado esquerdo) ========== */
   const canvas = document.getElementById('particles');
   const ctx    = canvas.getContext('2d');
-  let particles = [], W, H;
+  let W, H, parts = [];
 
-  function resizeParticles() {
+  function resizeParts() {
     const r = canvas.parentElement.getBoundingClientRect();
     W = canvas.width  = r.width  * devicePixelRatio;
     H = canvas.height = r.height * devicePixelRatio;
     canvas.style.width  = r.width  + 'px';
     canvas.style.height = r.height + 'px';
   }
-  resizeParticles();
-  window.addEventListener('resize', resizeParticles);
+  resizeParts();
+  window.addEventListener('resize', resizeParts);
 
-  for (let i = 0; i < 40; i++) particles.push({
-    x: Math.random() * 2000,
-    y: Math.random() * 1200,
+  for (let i = 0; i < 40; i++) parts.push({
+    x: Math.random() * 2000, y: Math.random() * 1200,
     r: (Math.random() * 1.4 + 0.4) * devicePixelRatio,
     vx: (Math.random() - 0.5) * 0.12,
     vy: -(Math.random() * 0.22 + 0.05),
     alpha: Math.random() * 0.28 + 0.08,
-    phase: Math.random() * Math.PI * 2
+    phase: Math.random() * Math.PI * 2,
   });
 
-  (function animPart(t) {
+  (function animParts(t) {
     ctx.clearRect(0, 0, W, H);
-    particles.forEach(p => {
+    parts.forEach(p => {
       p.x += p.vx + Math.sin(t / 2200 + p.phase) * 0.12;
       p.y += p.vy;
       if (p.y < -10) { p.y = H + 10; p.x = Math.random() * W; }
@@ -573,14 +522,13 @@
       ctx.fillStyle = `rgba(28,58,94,${p.alpha * tw})`;
       ctx.fill();
     });
-    requestAnimationFrame(animPart);
+    requestAnimationFrame(animParts);
   })(0);
 
-  /* ========== OLHO (mostrar/ocultar senha) ========== */
+  /* ========== OLHO (senha) ========== */
   const pwInput   = document.getElementById('password');
   const toggleBtn = document.getElementById('togglePw');
   const eyeIcon   = document.getElementById('eyeIcon');
-
   const eyeOpen   = `<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>`;
   const eyeClosed = `<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>`;
 
@@ -591,11 +539,10 @@
     toggleBtn.setAttribute('aria-label', show ? 'Ocultar senha' : 'Mostrar senha');
   });
 
-  /* ========== TOAST "ESQUECEU A SENHA" ========== */
+  /* ========== TOAST ========== */
   const toast     = document.getElementById('toast');
   const forgotBtn = document.getElementById('forgotBtn');
   let toastTimer;
-
   forgotBtn.addEventListener('click', () => {
     clearTimeout(toastTimer);
     toast.classList.add('show');
@@ -610,15 +557,12 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     const user = document.getElementById('user').value.trim();
-    const pass = pwInput.value;
+    const pass  = pwInput.value;
 
     if (!user || !pass) {
       btnText.textContent = 'PREENCHA OS CAMPOS';
       submitBtn.style.background = 'linear-gradient(135deg,#8b2c2c,#6b1f1f)';
-      setTimeout(() => {
-        btnText.textContent = 'ENTRAR';
-        submitBtn.style.background = '';
-      }, 2000);
+      setTimeout(() => { btnText.textContent = 'ENTRAR'; submitBtn.style.background = ''; }, 2000);
       return;
     }
 
@@ -634,76 +578,79 @@
     }, 1400);
   });
 
-  /* ========== PÉTALAS ========== */
-  const pc   = document.getElementById('petals');
-  const pCtx = pc.getContext('2d');
-  let petals = [], pW, pH;
-
-  function resizePetals() {
-    const r = pc.parentElement.getBoundingClientRect();
-    pW = pc.width  = r.width  * devicePixelRatio;
-    pH = pc.height = r.height * devicePixelRatio;
-    pc.style.width  = r.width  + 'px';
-    pc.style.height = r.height + 'px';
-  }
-  resizePetals();
-  window.addEventListener('resize', () => { resizePetals(); initPetals(); });
-
-  const petalColors = [
-    [255,182,193],[255,160,180],[250,145,168],[255,200,210],[240,128,158],[255,220,228]
+  /* ========== PÉTALAS SVG ========== */
+  const container  = document.getElementById('rightSide');
+  // Nomes exatos dos arquivos no seu repositório
+  const petalSrcs  = [
+    'PETALA VERSÃO 1.svg',
+    'PETALA VERSÃO 2.svg',
+    'PETALA VERSÃO 3.svg',
   ];
+  const TOTAL      = 36;   // quantidade de pétalas simultâneas
+  const petalState = [];
 
-  function mkPetal(fresh = false) {
-    const s = (Math.random() * 9 + 5) * devicePixelRatio;
-    const c = petalColors[Math.floor(Math.random() * petalColors.length)];
-    return {
-      x: Math.random() * pW,
-      y: fresh ? -s * 2 : Math.random() * pH,
-      s, c,
-      vy:  (Math.random() * 0.65 + 0.3)  * devicePixelRatio,
-      vx:  (Math.random() - 0.5) * 0.35  * devicePixelRatio,
-      rot: Math.random() * Math.PI * 2,
-      rs:  (Math.random() - 0.5) * 0.022,
-      sw:  Math.random() * Math.PI * 2,
-      swr: Math.random() * 0.55 + 0.18,
-      sws: Math.random() * 0.011 + 0.005,
-      a:   Math.random() * 0.4 + 0.45,
+  function rnd(min, max) { return min + Math.random() * (max - min); }
+
+  function createPetal() {
+    const img = document.createElement('img');
+    img.src   = petalSrcs[Math.floor(Math.random() * petalSrcs.length)];
+    img.classList.add('petal-el');
+    img.draggable = false;
+
+    const size = rnd(22, 52);          // tamanho em px
+    img.style.width  = size + 'px';
+    img.style.height = 'auto';
+
+    const state = {
+      el:      img,
+      x:       rnd(0, 100),            // % da largura do container
+      y:       rnd(-120, -20),         // começa acima do topo
+      rot:     rnd(0, 360),
+      vy:      rnd(0.03, 0.09),        // velocidade de queda (% por frame)
+      vx:      rnd(-0.02, 0.02),       // deriva horizontal
+      rotSpd:  rnd(-0.5, 0.5),         // graus/frame
+      swing:   rnd(0, Math.PI * 2),
+      swingR:  rnd(0.015, 0.04),
+      swingSpd:rnd(0.008, 0.018),
+      opacity: rnd(0.6, 1.0),
     };
+
+    img.style.opacity = state.opacity;
+    container.appendChild(img);
+    return state;
   }
 
-  function initPetals() { petals = Array.from({length: 42}, () => mkPetal(false)); }
-  initPetals();
-
-  function drawPetal(p) {
-    pCtx.save();
-    pCtx.translate(p.x, p.y);
-    pCtx.rotate(p.rot);
-    pCtx.globalAlpha = p.a;
-    pCtx.beginPath();
-    pCtx.scale(1, 0.52);
-    pCtx.arc(0, 0, p.s, 0, Math.PI * 2);
-    pCtx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},0.88)`;
-    pCtx.fill();
-    pCtx.beginPath();
-    pCtx.scale(0.52, 0.88);
-    pCtx.arc(p.s * 0.18, -p.s * 0.12, p.s * 0.48, 0, Math.PI * 2);
-    pCtx.fillStyle = 'rgba(255,255,255,0.3)';
-    pCtx.fill();
-    pCtx.restore();
+  // Inicializa espalhadas pela tela (não todas no topo)
+  for (let i = 0; i < TOTAL; i++) {
+    const s = createPetal();
+    s.y = rnd(-10, 110); // distribuídas pela altura logo no início
+    petalState.push(s);
   }
 
-  (function animPetals() {
-    pCtx.clearRect(0, 0, pW, pH);
-    petals.forEach(p => {
-      p.sw += p.sws;
-      p.x  += p.vx + Math.sin(p.sw) * p.swr * devicePixelRatio;
-      p.y  += p.vy;
-      p.rot += p.rs;
-      if (p.y > pH + p.s * 2) Object.assign(p, mkPetal(true));
-      drawPetal(p);
+  function animPetals() {
+    petalState.forEach(p => {
+      p.swing += p.swingSpd;
+      p.x     += p.vx + Math.sin(p.swing) * p.swingR;
+      p.y     += p.vy;
+      p.rot   += p.rotSpd;
+
+      // Recicla pétala que saiu da tela
+      if (p.y > 108) {
+        p.x   = rnd(0, 100);
+        p.y   = rnd(-12, -4);
+        p.rot = rnd(0, 360);
+        // sorteia uma nova imagem
+        const idx = Math.floor(Math.random() * petalSrcs.length);
+        if (p.el.src !== petalSrcs[idx]) p.el.src = petalSrcs[idx];
+      }
+
+      p.el.style.left      = p.x + '%';
+      p.el.style.top       = p.y + '%';
+      p.el.style.transform = `rotate(${p.rot}deg)`;
     });
     requestAnimationFrame(animPetals);
-  })();
+  }
+  animPetals();
 </script>
 </body>
 </html>
