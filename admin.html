@@ -46,393 +46,120 @@
       z-index: 50;
       box-shadow: 0 1px 8px rgba(28,58,94,0.06);
     }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .header-logo {
-      width: 48px;
-      height: 48px;
-      object-fit: contain;
-      filter: drop-shadow(0 2px 6px rgba(28,58,94,0.15));
-    }
-
-    .header-text h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 22px;
-      letter-spacing: 0.03em;
-      line-height: 1;
-    }
-
-    .header-text p {
-      font-size: 12px;
-      color: var(--muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .admin-badge {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--navy-mid);
-      background: var(--navy-pale);
-      padding: 6px 14px;
-      border-radius: 999px;
-    }
-
-    .btn-logout {
-      padding: 9px 22px;
-      background: transparent;
-      border: 1.5px solid var(--border);
-      border-radius: 8px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .header-brand { display: flex; align-items: center; gap: 14px; }
+    .header-logo  { width: 48px; height: 48px; object-fit: contain; filter: drop-shadow(0 2px 6px rgba(28,58,94,0.15)); }
+    .header-text h1 { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 22px; letter-spacing: 0.03em; line-height: 1; }
+    .header-text p  { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; }
+    .header-right   { display: flex; align-items: center; gap: 16px; }
+    .admin-badge    { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--navy-mid); background: var(--navy-pale); padding: 6px 14px; border-radius: 999px; }
+    .btn-logout     { padding: 9px 22px; background: transparent; border: 1.5px solid var(--border); border-radius: 8px; font-family: inherit; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; color: var(--muted); cursor: pointer; transition: all 0.2s; }
     .btn-logout:hover { border-color: var(--accent); color: var(--accent); }
 
     /* ===== MAIN ===== */
-    main {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 40px 24px;
-    }
+    main { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
 
-    /* ===== TOOLBAR ===== */
-    .toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
+    .toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; gap: 16px; flex-wrap: wrap; }
+    .toolbar-left h2 { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 32px; letter-spacing: -0.01em; }
+    .toolbar-left p  { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
-    .toolbar-left h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 32px;
-      letter-spacing: -0.01em;
-    }
-
-    .toolbar-left p {
-      font-size: 13px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .btn-new {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep));
-      color: var(--white);
-      border: none;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 13.5px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(28,58,94,0.25);
-      transition: all 0.2s;
-    }
+    .btn-new { display: flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep)); color: var(--white); border: none; border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; box-shadow: 0 4px 14px rgba(28,58,94,0.25); transition: all 0.2s; }
     .btn-new:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(28,58,94,0.35); }
 
-    /* ===== USERS GRID ===== */
-    .users-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 18px;
-    }
+    /* ===== GRID ===== */
+    .users-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
 
-    /* ===== USER CARD ===== */
-    .user-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: box-shadow 0.2s, transform 0.2s;
-      opacity: 0;
-      transform: translateY(10px);
-      animation: cardIn 0.5s cubic-bezier(.2,.7,.2,1) forwards;
-    }
-    .user-card:hover {
-      box-shadow: 0 6px 24px rgba(28,58,94,0.13);
-      transform: translateY(-2px);
-    }
+    /* ===== CARD ===== */
+    .user-card { background: var(--white); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: var(--shadow); transition: box-shadow 0.2s, transform 0.2s; opacity: 0; transform: translateY(10px); animation: cardIn 0.5s cubic-bezier(.2,.7,.2,1) forwards; }
+    .user-card:hover { box-shadow: 0 6px 24px rgba(28,58,94,0.13); transform: translateY(-2px); }
     @keyframes cardIn { to { opacity: 1; transform: translateY(0); } }
 
-    .card-header {
-      background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep));
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
+    .card-header { background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep)); padding: 20px; display: flex; align-items: center; gap: 14px; }
+    .card-avatar { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); display: grid; place-items: center; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 700; color: var(--white); flex-shrink: 0; border: 2px solid rgba(255,255,255,0.25); }
+    .card-info   { flex: 1; min-width: 0; }
+    .card-name   { font-weight: 700; font-size: 15px; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-username { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+    .card-role   { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px; flex-shrink: 0; }
+    .role-admin  { background: rgba(255,255,255,0.2); color: var(--white); }
+    .role-user   { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.75); }
 
-    .card-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.15);
-      display: grid;
-      place-items: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--white);
-      flex-shrink: 0;
-      border: 2px solid rgba(255,255,255,0.25);
-    }
-
-    .card-info { flex: 1; min-width: 0; }
-
-    .card-name {
-      font-weight: 700;
-      font-size: 15px;
-      color: var(--white);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .card-username {
-      font-size: 12px;
-      color: rgba(255,255,255,0.65);
-      margin-top: 2px;
-    }
-
-    .card-role {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 999px;
-      flex-shrink: 0;
-    }
-    .role-admin { background: rgba(255,255,255,0.2);  color: var(--white); }
-    .role-user  { background: rgba(255,255,255,0.1);  color: rgba(255,255,255,0.75); }
-
-    /* ── Status + último login ── */
-    .card-meta {
-      padding: 12px 18px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
-    }
-
-    .meta-row {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
+    .card-meta   { padding: 12px 18px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 7px; }
+    .meta-row    { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--muted); }
     .meta-row svg { flex-shrink: 0; opacity: 0.7; }
-
-    .status-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
+    .meta-highlight { font-weight: 600; color: var(--navy); }
+    .status-dot  { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
     .status-dot.active   { background: #27ae60; }
     .status-dot.inactive { background: #e74c3c; }
 
-    .meta-highlight {
-      font-weight: 600;
-      color: var(--navy);
-    }
-
-    /* ── Ações ── */
     .card-actions { display: flex; flex-direction: column; }
-
-    .action-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 18px;
-      background: none;
-      border: none;
-      border-bottom: 1px solid var(--border);
-      font-family: inherit;
-      font-size: 13.5px;
-      color: var(--navy);
-      cursor: pointer;
-      text-align: left;
-      transition: background 0.15s, color 0.15s;
-      width: 100%;
-    }
+    .action-btn { display: flex; align-items: center; gap: 10px; padding: 13px 18px; background: none; border: none; border-bottom: 1px solid var(--border); font-family: inherit; font-size: 13.5px; color: var(--navy); cursor: pointer; text-align: left; transition: background 0.15s, color 0.15s; width: 100%; }
     .action-btn:last-child { border-bottom: none; }
     .action-btn:hover         { background: var(--paper); }
     .action-btn.danger:hover  { background: #fdf2f2; color: var(--accent); }
     .action-btn.warning:hover { background: #fdf8f2; color: #e67e22; }
+    .action-btn.history:hover { background: #f0f4ff; color: var(--navy-mid); }
     .action-btn svg { flex-shrink: 0; opacity: 0.55; }
     .action-btn:hover svg { opacity: 1; }
 
-    /* ===== EMPTY / LOADING ===== */
-    .empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 80px 20px;
+    /* Botão histórico — menor e discreto */
+    .action-btn.history {
+      padding: 10px 18px;
+      font-size: 12.5px;
       color: var(--muted);
-    }
-    .loading-wrap {
-      grid-column: 1 / -1;
-      display: flex;
+      background: var(--paper);
       justify-content: center;
-      padding: 80px;
+      gap: 6px;
     }
-    .spinner {
-      width: 36px; height: 36px;
-      border: 3px solid var(--border);
-      border-top-color: var(--navy);
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-    }
+
+    /* ===== EMPTY / LOADING ===== */
+    .empty { grid-column: 1 / -1; text-align: center; padding: 80px 20px; color: var(--muted); }
+    .loading-wrap { grid-column: 1 / -1; display: flex; justify-content: center; padding: 80px; }
+    .spinner { width: 36px; height: 36px; border: 3px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ===== MODAL ===== */
-    .modal-overlay {
-      position: fixed; inset: 0;
-      background: rgba(20,41,74,0.45);
-      backdrop-filter: blur(4px);
-      z-index: 100;
-      display: grid;
-      place-items: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s;
-    }
+    /* ===== MODAIS ===== */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(20,41,74,0.45); backdrop-filter: blur(4px); z-index: 100; display: grid; place-items: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
     .modal-overlay.open { opacity: 1; pointer-events: all; }
 
-    .modal {
-      background: var(--white);
-      border-radius: 20px;
-      width: 100%;
-      max-width: 420px;
-      padding: 36px;
-      box-shadow: 0 24px 64px rgba(28,58,94,0.25);
-      transform: translateY(12px) scale(0.98);
-      transition: transform 0.25s cubic-bezier(.2,.7,.2,1);
-      margin: 16px;
-    }
+    .modal { background: var(--white); border-radius: 20px; width: 100%; max-width: 420px; padding: 36px; box-shadow: 0 24px 64px rgba(28,58,94,0.25); transform: translateY(12px) scale(0.98); transition: transform 0.25s cubic-bezier(.2,.7,.2,1); margin: 16px; }
     .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-
-    .modal h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 700;
-      font-size: 26px;
-      margin-bottom: 6px;
-    }
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 26px; margin-bottom: 6px; }
     .modal p.modal-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; }
 
+    /* Modal histórico — mais largo */
+    .modal.modal-lg { max-width: 520px; padding: 32px; }
+
+    /* Lista do histórico */
+    .history-list { display: flex; flex-direction: column; gap: 8px; max-height: 380px; overflow-y: auto; padding-right: 4px; margin-bottom: 24px; }
+    .history-list::-webkit-scrollbar { width: 4px; }
+    .history-list::-webkit-scrollbar-track { background: transparent; }
+    .history-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .history-item { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: var(--paper); border-radius: 10px; border: 1px solid var(--border); }
+    .history-index { font-size: 11px; font-weight: 700; color: var(--muted); width: 20px; text-align: center; flex-shrink: 0; }
+    .history-info  { flex: 1; min-width: 0; }
+    .history-date  { font-size: 13px; font-weight: 600; color: var(--navy); }
+    .history-device { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    .history-empty { text-align: center; padding: 32px; color: var(--muted); font-size: 14px; }
+
+    .history-loading { display: flex; justify-content: center; padding: 40px; }
+
     .form-group { margin-bottom: 16px; }
-    .form-group label {
-      display: block;
-      font-size: 11.5px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 7px;
-    }
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 14px;
-      color: var(--navy);
-      background: var(--paper);
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus {
-      border-color: var(--navy-mid);
-      box-shadow: 0 0 0 4px rgba(28,58,94,0.1);
-      background: var(--white);
-    }
+    .form-group label { display: block; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px; }
+    .form-group input, .form-group select { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 14px; color: var(--navy); background: var(--paper); outline: none; transition: border-color 0.2s, box-shadow 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--navy-mid); box-shadow: 0 0 0 4px rgba(28,58,94,0.1); background: var(--white); }
 
     .modal-actions { display: flex; gap: 10px; margin-top: 24px; }
-
-    .btn-cancel {
-      flex: 1;
-      padding: 13px;
-      background: var(--paper);
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
+    .btn-cancel  { flex: 1; padding: 13px; background: var(--paper); border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 700; color: var(--muted); cursor: pointer; transition: all 0.2s; }
     .btn-cancel:hover { border-color: var(--navy); color: var(--navy); }
-
-    .btn-confirm {
-      flex: 2;
-      padding: 13px;
-      background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep));
-      border: none;
-      border-radius: 10px;
-      font-family: inherit;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--white);
-      cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 4px 14px rgba(28,58,94,0.25);
-    }
+    .btn-confirm { flex: 2; padding: 13px; background: linear-gradient(135deg, var(--navy-mid), var(--navy-deep)); border: none; border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 700; color: var(--white); cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 14px rgba(28,58,94,0.25); }
     .btn-confirm:hover { transform: translateY(-1px); }
-    .btn-confirm.danger {
-      background: linear-gradient(135deg, #c0392b, #96281b);
-      box-shadow: 0 4px 14px rgba(192,57,43,0.25);
-    }
+    .btn-confirm.danger { background: linear-gradient(135deg, #c0392b, #96281b); box-shadow: 0 4px 14px rgba(192,57,43,0.25); }
+    .btn-close   { width: 100%; padding: 13px; background: var(--paper); border: 1.5px solid var(--border); border-radius: 10px; font-family: inherit; font-size: 13.5px; font-weight: 700; color: var(--navy); cursor: pointer; transition: all 0.2s; }
+    .btn-close:hover { background: var(--navy-pale); }
 
     /* ===== TOAST ===== */
-    .toast {
-      position: fixed;
-      bottom: 28px; left: 50%;
-      transform: translateX(-50%) translateY(12px);
-      background: var(--navy);
-      color: var(--white);
-      padding: 13px 22px;
-      border-radius: 12px;
-      font-size: 13.5px;
-      box-shadow: 0 8px 28px rgba(28,58,94,0.3);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.3s cubic-bezier(.2,.7,.2,1);
-      z-index: 200;
-      white-space: nowrap;
-    }
-    .toast.show  { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(12px); background: var(--navy); color: var(--white); padding: 13px 22px; border-radius: 12px; font-size: 13.5px; box-shadow: 0 8px 28px rgba(28,58,94,0.3); opacity: 0; pointer-events: none; transition: all 0.3s cubic-bezier(.2,.7,.2,1); z-index: 200; white-space: nowrap; }
+    .toast.show    { opacity: 1; transform: translateX(-50%) translateY(0); }
     .toast.success { background: var(--green); }
     .toast.error   { background: var(--accent); }
 
@@ -470,7 +197,6 @@
       Cadastrar novo usuário
     </button>
   </div>
-
   <div class="users-grid" id="usersGrid">
     <div class="loading-wrap"><div class="spinner"></div></div>
   </div>
@@ -481,25 +207,10 @@
   <div class="modal">
     <h3>Novo usuário</h3>
     <p class="modal-sub">Preencha os dados para criar um novo acesso.</p>
-    <div class="form-group">
-      <label>Nome completo</label>
-      <input type="text" id="newName" placeholder="Ex: João Silva" />
-    </div>
-    <div class="form-group">
-      <label>Usuário</label>
-      <input type="text" id="newUsername" placeholder="Ex: joao.silva" />
-    </div>
-    <div class="form-group">
-      <label>Senha</label>
-      <input type="password" id="newPassword" placeholder="Mínimo 6 caracteres" />
-    </div>
-    <div class="form-group">
-      <label>Perfil</label>
-      <select id="newRole">
-        <option value="user">Usuário</option>
-        <option value="admin">Administrador</option>
-      </select>
-    </div>
+    <div class="form-group"><label>Nome completo</label><input type="text" id="newName" placeholder="Ex: João Silva" /></div>
+    <div class="form-group"><label>Usuário</label><input type="text" id="newUsername" placeholder="Ex: joao.silva" /></div>
+    <div class="form-group"><label>Senha</label><input type="password" id="newPassword" placeholder="Mínimo 6 caracteres" /></div>
+    <div class="form-group"><label>Perfil</label><select id="newRole"><option value="user">Usuário</option><option value="admin">Administrador</option></select></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('create')">Cancelar</button>
       <button class="btn-confirm" onclick="createUser()">Criar usuário</button>
@@ -512,10 +223,7 @@
   <div class="modal">
     <h3>Alterar senha</h3>
     <p class="modal-sub" id="passwordModalSub">Digite a nova senha.</p>
-    <div class="form-group">
-      <label>Nova senha</label>
-      <input type="password" id="newPwValue" placeholder="Mínimo 6 caracteres" />
-    </div>
+    <div class="form-group"><label>Nova senha</label><input type="password" id="newPwValue" placeholder="Mínimo 6 caracteres" /></div>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('password')">Cancelar</button>
       <button class="btn-confirm" onclick="changePassword()">Salvar senha</button>
@@ -535,6 +243,18 @@
   </div>
 </div>
 
+<!-- MODAL HISTÓRICO -->
+<div class="modal-overlay" id="modalHistory">
+  <div class="modal modal-lg">
+    <h3>Histórico de login</h3>
+    <p class="modal-sub" id="historyModalSub">Últimos acessos do usuário.</p>
+    <div class="history-list" id="historyList">
+      <div class="history-loading"><div class="spinner"></div></div>
+    </div>
+    <button class="btn-close" onclick="closeModal('history')">Fechar</button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -545,15 +265,10 @@
   const name  = localStorage.getItem('odin_name');
 
   if (!token || role !== 'admin') window.location.href = 'index.html';
-
   document.getElementById('adminName').textContent = name || 'Admin';
 
-  function logout() {
-    localStorage.clear();
-    window.location.href = 'index.html';
-  }
+  function logout() { localStorage.clear(); window.location.href = 'index.html'; }
 
-  // ── Toast ──
   let toastTimer;
   function showToast(msg, type = 'success') {
     const t = document.getElementById('toast');
@@ -563,57 +278,23 @@
     toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
   }
 
-  // ── API helper ──
   async function api(path, options = {}) {
     const res = await fetch(`${API_URL}${path}`, {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        ...(options.headers || {}),
-      },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`, ...(options.headers || {}) },
     });
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Erro na requisição');
     return data;
   }
 
-  // ── Formatar data ──
   function formatDate(dateStr) {
-    if (!dateStr) return 'Nunca acessou';
-    const d = new Date(dateStr);
-    return d.toLocaleString('pt-BR', {
-      day:    '2-digit',
-      month:  '2-digit',
-      year:   'numeric',
-      hour:   '2-digit',
-      minute: '2-digit',
-    });
+    if (!dateStr) return '—';
+    return new Date(dateStr).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' });
   }
 
-  // ── Ícone do OS ──
-  function osIcon(os) {
-    const icons = {
-      'Windows': '🖥️',
-      'macOS':   '🍎',
-      'Linux':   '🐧',
-      'Android': '📱',
-      'iOS':     '📱',
-    };
-    return icons[os] || '💻';
-  }
-
-  // ── Ícone do browser ──
-  function browserIcon(browser) {
-    const icons = {
-      'Chrome':  '🌐',
-      'Firefox': '🦊',
-      'Safari':  '🧭',
-      'Edge':    '🔷',
-      'Opera':   '🔴',
-    };
-    return icons[browser] || '🌐';
-  }
+  function osIcon(os)      { return { Windows: '🖥️', macOS: '🍎', Linux: '🐧', Android: '📱', iOS: '📱' }[os] || '💻'; }
+  function browserIcon(b)  { return { Chrome: '🌐', Firefox: '🦊', Safari: '🧭', Edge: '🔷', Opera: '🔴' }[b]  || '🌐'; }
 
   // ── Carregar usuários ──
   let users = [];
@@ -626,22 +307,17 @@
       document.getElementById('userCount').textContent =
         `${users.length} usuário${users.length !== 1 ? 's' : ''} cadastrado${users.length !== 1 ? 's' : ''}`;
       renderUsers();
-    } catch {
-      grid.innerHTML = '<div class="empty"><p>Erro ao carregar usuários.</p></div>';
-    }
+    } catch { grid.innerHTML = '<div class="empty"><p>Erro ao carregar usuários.</p></div>'; }
   }
 
   function renderUsers() {
     const grid = document.getElementById('usersGrid');
-    if (users.length === 0) {
-      grid.innerHTML = '<div class="empty"><p>Nenhum usuário cadastrado ainda.</p></div>';
-      return;
-    }
+    if (!users.length) { grid.innerHTML = '<div class="empty"><p>Nenhum usuário cadastrado.</p></div>'; return; }
 
     grid.innerHTML = users.map((u, i) => {
-      const lastLogin  = u.lastLogin ? formatDate(u.lastLogin) : null;
-      const os         = u.lastDevice?.os      || null;
-      const browser    = u.lastDevice?.browser  || null;
+      const lastLogin   = u.lastLogin ? formatDate(u.lastLogin) : null;
+      const os          = u.lastDevice?.os || null;
+      const browser     = u.lastDevice?.browser || null;
       const neverLogged = !lastLogin;
 
       return `
@@ -667,7 +343,7 @@
           ${!neverLogged ? `
           <div class="meta-row">
             <span>${osIcon(os)} ${os || 'Desconhecido'}</span>
-            <span style="margin-left:8px">${browserIcon(browser)} ${browser || 'Desconhecido'}</span>
+            <span style="margin-left:10px">${browserIcon(browser)} ${browser || 'Desconhecido'}</span>
           </div>` : ''}
         </div>
 
@@ -684,28 +360,28 @@
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>
             Deletar usuário
           </button>
+          <button class="action-btn history" onclick="openHistoryModal('${u._id}', '${u.name || u.username}')">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Histórico de login
+          </button>
         </div>
       </div>`;
     }).join('');
   }
 
-  // ── Modais ──
-  function openModal(name) {
-    document.getElementById(`modal${name[0].toUpperCase() + name.slice(1)}`).classList.add('open');
-  }
-  function closeModal(name) {
-    document.getElementById(`modal${name[0].toUpperCase() + name.slice(1)}`).classList.remove('open');
-  }
+  // ── Modais genéricos ──
+  function openModal(name) { document.getElementById(`modal${name[0].toUpperCase() + name.slice(1)}`).classList.add('open'); }
+  function closeModal(name) { document.getElementById(`modal${name[0].toUpperCase() + name.slice(1)}`).classList.remove('open'); }
   document.querySelectorAll('.modal-overlay').forEach(el => {
     el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
   });
 
   // ── Criar usuário ──
   async function createUser() {
-    const name     = document.getElementById('newName').value.trim();
+    const name = document.getElementById('newName').value.trim();
     const username = document.getElementById('newUsername').value.trim();
     const password = document.getElementById('newPassword').value;
-    const role     = document.getElementById('newRole').value;
+    const role = document.getElementById('newRole').value;
     if (!username || !password) return showToast('Preencha usuário e senha.', 'error');
     try {
       await api('/api/users', { method: 'POST', body: JSON.stringify({ name, username, password, role }) });
@@ -734,7 +410,7 @@
     } catch (err) { showToast(err.message, 'error'); }
   }
 
-  // ── Toggle ativo ──
+  // ── Toggle ──
   async function toggleUser(id) {
     try {
       const data = await api(`/api/users/${id}/toggle`, { method: 'PUT' });
@@ -747,8 +423,7 @@
   let deleteTargetId = null;
   function openDeleteModal(id, name) {
     deleteTargetId = id;
-    document.getElementById('deleteModalSub').textContent =
-      `Tem certeza que deseja deletar "${name}"? Esta ação não pode ser desfeita.`;
+    document.getElementById('deleteModalSub').textContent = `Tem certeza que deseja deletar "${name}"? Esta ação não pode ser desfeita.`;
     openModal('delete');
   }
   async function deleteUser() {
@@ -758,6 +433,35 @@
       showToast('Usuário deletado.', 'success');
       loadUsers();
     } catch (err) { showToast(err.message, 'error'); }
+  }
+
+  // ── Histórico de login ──
+  async function openHistoryModal(id, name) {
+    document.getElementById('historyModalSub').textContent = `Últimos acessos de ${name}.`;
+    document.getElementById('historyList').innerHTML = '<div class="history-loading"><div class="spinner"></div></div>';
+    openModal('history');
+
+    try {
+      const data = await api(`/api/users/${id}/history`);
+      const list = data.history;
+
+      if (!list || list.length === 0) {
+        document.getElementById('historyList').innerHTML = '<div class="history-empty">Nenhum acesso registrado ainda.</div>';
+        return;
+      }
+
+      document.getElementById('historyList').innerHTML = list.map((item, i) => `
+        <div class="history-item">
+          <div class="history-index">${i + 1}</div>
+          <div class="history-info">
+            <div class="history-date">${formatDate(item.date)}</div>
+            <div class="history-device">${osIcon(item.os)} ${item.os || 'Desconhecido'} &nbsp;·&nbsp; ${browserIcon(item.browser)} ${item.browser || 'Desconhecido'}</div>
+          </div>
+        </div>
+      `).join('');
+    } catch {
+      document.getElementById('historyList').innerHTML = '<div class="history-empty">Erro ao carregar histórico.</div>';
+    }
   }
 
   loadUsers();
