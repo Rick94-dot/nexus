@@ -375,9 +375,34 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ----------- LADO DIREITO (intocado) ----------- */
+    /* ----------- LADO DIREITO (cerejeira + pétalas) ----------- */
     .right-side {
-      background: var(--black);
+      position: relative;
+      background-image: url('cerejeira.jpg');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    /* Vinheta sutil pra dar profundidade nas bordas */
+    .right-side::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, transparent 50%, rgba(120, 60, 80, 0.25) 100%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, transparent 30%, transparent 70%, rgba(80, 30, 50, 0.15) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    #petals {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
     }
 
     /* ----------- RESPONSIVO ----------- */
@@ -462,8 +487,10 @@
       </div>
     </section>
 
-    <!-- LADO DIREITO (intocado, preto) -->
-    <section class="right-side"></section>
+    <!-- LADO DIREITO (cerejeira + pétalas) -->
+    <section class="right-side">
+      <canvas id="petals"></canvas>
+    </section>
 
   </div>
 
@@ -572,6 +599,88 @@
         // aqui você faria o redirecionamento ou a chamada à API
       }, 1400);
     });
+
+    /* ========== PÉTALAS CAINDO ========== */
+    const petalCanvas = document.getElementById('petals');
+    const pCtx = petalCanvas.getContext('2d');
+    let petals = [];
+    let pW, pH;
+
+    function resizePetals() {
+      const r = petalCanvas.parentElement.getBoundingClientRect();
+      pW = petalCanvas.width  = r.width  * devicePixelRatio;
+      pH = petalCanvas.height = r.height * devicePixelRatio;
+      petalCanvas.style.width  = r.width  + 'px';
+      petalCanvas.style.height = r.height + 'px';
+    }
+    resizePetals();
+    window.addEventListener('resize', () => { resizePetals(); spawnPetals(); });
+
+    const petalColors = [
+      'rgba(255,182,193,',
+      'rgba(255,160,180,',
+      'rgba(250,145,168,',
+      'rgba(255,200,210,',
+      'rgba(240,128,158,',
+      'rgba(255,220,228,',
+    ];
+
+    function makePetal(fromTop = false) {
+      const size = (Math.random() * 10 + 6) * devicePixelRatio;
+      return {
+        x:       Math.random() * pW,
+        y:       fromTop ? -size * 2 : Math.random() * pH,
+        size,
+        speedY:  (Math.random() * 0.7 + 0.35) * devicePixelRatio,
+        speedX:  (Math.random() - 0.5) * 0.4 * devicePixelRatio,
+        rot:     Math.random() * Math.PI * 2,
+        rotSpd:  (Math.random() - 0.5) * 0.025,
+        swing:   Math.random() * Math.PI * 2,
+        swingR:  Math.random() * 0.6 + 0.2,
+        swingSpd:Math.random() * 0.012 + 0.006,
+        alpha:   Math.random() * 0.45 + 0.45,
+        color:   petalColors[Math.floor(Math.random() * petalColors.length)],
+      };
+    }
+
+    function spawnPetals() {
+      petals = Array.from({ length: 38 }, () => makePetal(false));
+    }
+    spawnPetals();
+
+    function drawPetal(p) {
+      pCtx.save();
+      pCtx.translate(p.x, p.y);
+      pCtx.rotate(p.rot);
+      pCtx.globalAlpha = p.alpha;
+      // corpo da pétala
+      pCtx.beginPath();
+      pCtx.scale(1, 0.55);
+      pCtx.arc(0, 0, p.size, 0, Math.PI * 2);
+      pCtx.fillStyle = `${p.color}0.88)`;
+      pCtx.fill();
+      // reflexo interno suave
+      pCtx.beginPath();
+      pCtx.scale(0.55, 0.9);
+      pCtx.arc(p.size * 0.2, -p.size * 0.1, p.size * 0.5, 0, Math.PI * 2);
+      pCtx.fillStyle = 'rgba(255,255,255,0.32)';
+      pCtx.fill();
+      pCtx.restore();
+    }
+
+    function animatePetals() {
+      pCtx.clearRect(0, 0, pW, pH);
+      petals.forEach(p => {
+        p.swing += p.swingSpd;
+        p.x += p.speedX + Math.sin(p.swing) * p.swingR * devicePixelRatio;
+        p.y += p.speedY;
+        p.rot += p.rotSpd;
+        if (p.y > pH + p.size * 2) Object.assign(p, makePetal(true));
+        drawPetal(p);
+      });
+      requestAnimationFrame(animatePetals);
+    }
+    requestAnimationFrame(animatePetals);
   </script>
 </body>
 </html>
