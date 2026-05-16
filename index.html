@@ -37,27 +37,6 @@
       position: relative;
     }
 
-    /* Overlay que cavalga os dois painéis e elimina a linha da borda */
-    .blend {
-      position: absolute;
-      top: 0; bottom: 0;
-      left: calc(50% - 18%);   /* começa 18% antes da borda */
-      width: 36%;               /* se estende 18% para cada lado */
-      background: linear-gradient(
-        to right,
-        #fafbfc        0%,
-        rgba(250,251,252,0.92) 18%,
-        rgba(250,251,252,0.70) 30%,
-        rgba(250,251,252,0.44) 42%,
-        rgba(250,251,252,0.22) 55%,
-        rgba(250,251,252,0.08) 68%,
-        rgba(250,251,252,0.02) 82%,
-        transparent    100%
-      );
-      pointer-events: none;
-      z-index: 10;
-    }
-
     /* ===================== LADO ESQUERDO ===================== */
     .login-side {
       position: relative;
@@ -70,6 +49,9 @@
       background-image:
         radial-gradient(ellipse at top left,    rgba(28,58,94,0.04), transparent 60%),
         radial-gradient(ellipse at bottom right, rgba(28,58,94,0.03), transparent 60%);
+      /* Sombra que "vaza" para a direita, cobrindo a borda do grid */
+      box-shadow: 40px 0 80px 40px #fafbfc;
+      z-index: 2;
     }
 
     /* Textura de papel sutil */
@@ -419,9 +401,6 @@
 </head>
 <body>
 <div class="page">
-
-  <!-- Overlay que cavalga os dois painéis para transição suave -->
-  <div class="blend" aria-hidden="true"></div>
 
   <!-- ===== LADO ESQUERDO ===== -->
   <section class="login-side">
