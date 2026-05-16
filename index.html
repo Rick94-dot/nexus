@@ -537,33 +537,79 @@
     toastTimer = setTimeout(() => toast.classList.remove('show'), 4500);
   });
 
-  /* ========== SUBMIT ========== */
+  /* ========== SUBMIT — chamada real à API ========== */
   const form      = document.getElementById('loginForm');
   const submitBtn = document.getElementById('submitBtn');
   const btnText   = submitBtn.querySelector('.btn-text');
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
-    const user = document.getElementById('user').value.trim();
-    const pass  = pwInput.value;
+  // ⚠️ Após subir o backend no Render, troque pela URL real
+  // Exemplo: 'https://nexus-backend.onrender.com'
+  const API_URL = 'https://nexus-backend-d4hj.onrender.com';
 
-    if (!user || !pass) {
-      btnText.textContent = 'PREENCHA OS CAMPOS';
-      submitBtn.style.background = 'linear-gradient(135deg,#8b2c2c,#6b1f1f)';
-      setTimeout(() => { btnText.textContent = 'ENTRAR'; submitBtn.style.background = ''; }, 2000);
+  function setError(msg) {
+    btnText.textContent = msg;
+    submitBtn.style.background = 'linear-gradient(135deg,#8b2c2c,#6b1f1f)';
+    submitBtn.classList.remove('loading');
+    submitBtn.disabled = false;
+    setTimeout(() => {
+      btnText.textContent = 'ENTRAR';
+      submitBtn.style.background = '';
+    }, 2500);
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const username = document.getElementById('user').value.trim();
+    const password = pwInput.value;
+
+    if (!username || !password) {
+      setError('PREENCHA OS CAMPOS');
       return;
     }
 
+    // Estado de carregando
     submitBtn.classList.add('loading');
     submitBtn.disabled = true;
     btnText.textContent = 'ENTRANDO';
 
-    // ← substitua pelo seu fetch/autenticação real
-    setTimeout(() => {
+    try {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ username, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        // Mensagem de erro vinda do backend
+        setError(data.message || 'ERRO AO ENTRAR');
+        return;
+      }
+
+      // Salva o token no localStorage para uso nas próximas páginas
+      localStorage.setItem('odin_token', data.token);
+      localStorage.setItem('odin_role',  data.role);
+      localStorage.setItem('odin_name',  data.name);
+
+      // Feedback visual de sucesso
       submitBtn.classList.remove('loading');
-      btnText.textContent = 'BEM-VINDO ✓';
+      btnText.textContent = `BEM-VINDO, ${data.name.toUpperCase()} ✓`;
       submitBtn.style.background = 'linear-gradient(135deg,#2d6a4f,#1e4d39)';
-    }, 1400);
+
+      // Redireciona conforme o role após breve pausa
+      setTimeout(() => {
+        if (data.role === 'admin') {
+          window.location.href = 'admin.html';
+        } else {
+          window.location.href = 'dashboard.html';
+        }
+      }, 1000);
+
+    } catch (err) {
+      // Erro de rede (backend offline, CORS, etc.)
+      setError('SEM CONEXÃO COM O SERVIDOR');
+    }
   });
 
   /* ========== PÉTALAS SVG ========== */
